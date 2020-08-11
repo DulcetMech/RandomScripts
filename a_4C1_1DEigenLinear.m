@@ -11,11 +11,11 @@ h = Lx/ne; % Length of the elements
 x = [0:h:Lx];   % Coordinates table
 
 %step 2 : Compute Elementary matrices
-Ke = c0^2 * [1;-1;-1;1]*1/h;
+Ke = c0^2 * [1,-1;-1,1]*1/h;
 Me = [2,1;1,2]*h/6; 
 
 %Step 3 Assembling
-I = eye[2,2];
+I = eye(2,2);
 K = zeros(nnt, nnt);
 M = zeros(nnt, nnt);
 for ie = 1:ne
@@ -48,8 +48,7 @@ end
 
 % Step 6: Comparison with the exact solution for a selected number of modes
 
-nm = min(4, ndof); % Here we select the first modes up to
-the fourth
+nm = min(4, ndof); % Here we select the first modes up to the fourth
 theo = c0*[1:ndof]*pi / Lx;
 Err = abs(theo-w)./theo;
 fprintf('\n ************Results for %d lin elements ************', ne);
@@ -57,8 +56,7 @@ fprintf('\n ====================================================');
 fprintf('\n Mode FEM (Hz) Exact (Hz) Error(%%)');
 fprintf('\n --------------------------------');
 for m=1:nm
- fprintf('\n %d %7.2f %7.2f %3.1f', m, w(m)/2/pi, theo(m)/2/pi,
-Err(m)*100);
+ fprintf('\n %d %7.2f %7.2f %3.1f', m, w(m)/2/pi, theo(m)/2/pi, Err(m)*100);
 end
 fprintf('\n ================================================\n');
 fprintf('\n');
